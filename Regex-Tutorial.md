@@ -62,3 +62,67 @@ the algorithm is set to force characters between seven and nine characters long
 abc|cba
 
 results in a match of abc OR cba only
+
+### OR Operator
+|
+This operator acts like a Boolean OR. It causes a match of the expression before or after the | and can be utilized inside a group or on a whole expression. In terms of order, it causes the search-string to look for a match of either what precedes or follows after the |. In the example: <abc>|<cba> it is looking for either <abc> or <cba>.
+### Character Classes
+In order to search for match characters between a specific range of character, we create what is called "character classes".
+
+Some example types:
+
+\w This will match any word character (alphanumeric and underscored) such as [a-z0-9_], but will only match lowercase character without accent marks.
+
+\W This matches any character that is not a word character (alphanumeric and underscored) such as [A-Za-z0-9_]
+
+\d sets the search to match any digitized character such as 0-9
+
+\D` sets the search for non-digitized characters
+
+\p sets the match for a character in the specific unicode category
+
+[A-Z] utilizing the hyphen between the two characters creates a range for the search criteria
+
+' is a wildcard and will accept any input
+### Flags
+---
+i ignores case
+
+g is a modifier to perform a global match which finds all matches instead of stopping after the first match. For case-sensitive matches, combine g with the i modifier.
+
+m is a multiline flag enabled to match the start and end of a line, rather than the start and end of a whole string. The anchors used at the beginning and end should reflect what we've learned previously: ^ and $.
+
+s is a global search for whitespace characters within a string
+### Grouping and Capturing
+---
+(abc){3} if we desired to group a selective pattern, we can introduce them between parentheses and include a numeric counter besides it. This example would search for the match of abcabcabc because the first group was denoted as (abc) and we included the need for it to repeat three times as {3}.
+### Bracket Expressions
+----
+A regular expression surrounded by square brackets is considered a bracket expression meant to match a single character or collating element. When the first character is a circumflex ^ then the bracket expression is complemented. An example is [a-z] as a bracket expression.
+### Greedy and Lazy Match
+-----
+Earlier, greedy and lazy matches were briefly remarked in Quantifiers.
+
+A greedy quantifier tells the search algorithm to match as many instances of the pattern presented as possible. It is the longest possible string match.
+### Boundaries
+----
+There are three separate positions to qualify as a word boundary:
+
+before the initial character in the string, if the first character is a word character
+
+after the last character in a string, if the last character is a word character
+
+between two characters within the string, where one is a word character while the other is not a word character
+
+### Back-references
+Backreferences will match the same text previously matched by a capturing group. If you wish to match a pair of opening and closing HTML tags and the text in between, you can introduce it as follows:
+
+<([A-Z][A-Z0-9]*)\b[^>]*>.*?</\1>
+
+### Look-ahead and Look-behind
+----
+Also known as "lookaround", the Look-Ahead and Look-Behind are zero-length assertions. The main difference with it is that they actually match characters and gives up the match, returning only the result: match or no match. They are called "assertions" since they do not consume the characters in the string, but assert whether a match is possible or not.
+
+## Author
+---
+phungxkhiem explained this tutorial - https://github.com/phungxkhiem/Regex-Tutorial
